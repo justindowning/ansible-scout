@@ -12,6 +12,7 @@
     scout_hostname:
     scout_display_name:
     scout_log_file:
+    scout_ruby_path:
     scout_environment:
     scout_roles:
     scout_http_proxy:

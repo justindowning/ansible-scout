@@ -81,6 +81,11 @@ Scout configures monitoring by role names - these are specified via the `roles` 
       <td><code>nil</code></td>
     </tr>
     <tr>
+      <td>:ruby_path</td>
+      <td>Optional location of the Ruby executable.</td>
+      <td><code>nil</code></td>
+    </tr>
+    <tr>
       <td>:environment</td>
       <td>Optional environment to group this host under in the Scout UI.</td>
       <td><code>nil</code></td>

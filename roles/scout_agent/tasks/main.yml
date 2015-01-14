@@ -3,20 +3,47 @@
   fail: msg="Bailing out. A scout_account_key is required." 
   when: scout_account_key is not defined 
 
-- name: Install the apt-key for the scout repository
+- name: Install the Ubuntu apt-key
   apt_key: url=https://archive.scoutapp.com/scout-archive.key
+  when: ansible_distribution == 'Ubuntu'
 
 - name: Set up the scout apt repository
   apt_repository: repo='deb http://archive.scoutapp.com ubuntu main'
+  when: ansible_distribution == 'Ubuntu'
 
 - name: install the scoutd package
   apt: name=scoutd state=present
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Install python-gnupg
+  yum: name=python-gnupg
+  when: ansible_distribution == "Fedora"
+
+- name: Install the RedHat GPG key
+  rpm_key: state=present key=https://archive.scoutapp.com/RPM-GPG-KEY-scout
+  when: ansible_distribution == "Red Hat Enterprise Linux" or ansible_distribution == "CentOS" or ansible_distribution == "Fedora"
+
+- name: Set up the scout yum repository
+  get_url: url=https://archive.scoutapp.com/yum.repos.d/scout-rhel.repo dest=/etc/yum.repos.d/scout.repo
+  when: ansible_distribution == "Red Hat Enterprise Linux" or ansible_distribution == "Centos"
+
+- name: Set up the scout yum repository
+  get_url: url=https://archive.scoutapp.com/yum.repos.d/scout-fedora.repo dest=/etc/yum.repos.d/scout.repo
+  when: ansible_distribution == "Fedora"
+
+- name: Install the scoutd package
+  yum: name=scoutd state=latest
+  when: ansible_distribution == "Red Hat Enterprise Linux" or ansible_distribution == "CentOS" or ansible_distribution == "Fedora"
 
 - name: Ensure the directory for the public key exists
   file: path=/var/lib/scoutd/.scout
           owner=scoutd
           group=scoutd
           state=directory
+
+- name: Install libselinux-python bindings
+  yum: name=libselinux-python state=present
+  when: ansible_distribution == "Red Hat Enterprise Linux" or ansible_distribution == "CentOS"
 
 - name: Copy scout_rsa.pub to the /var/lib/scoutd/.scout directory
   copy: src=scout_rsa.pub dest=/var/lib/scoutd/.scout owner=scoutd group=scoutd mode=0644
