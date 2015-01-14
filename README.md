@@ -4,8 +4,7 @@ Installs the agent for [Scout](http://scoutapp.com), a hosted server monitoring 
 
 This playbook deploys the Scout agent on your hosts:
 
-* Installs the [Scout Ruby gem](https://rubygems.org/gems/scout)
-* Configures a Cron job to run the monitoring agent
+* Installs the [Scout Agent](http://help.scoutapp.com/v1.2/docs/agent)
 
 ## Supported Platforms
 
@@ -19,7 +18,7 @@ The following platforms are supported by this playblook, meaning that the playbo
 
 ## Basic Setup
 
-Provide your account key in the "scout_key" variable in `site.yml`, then:
+Provide your account key in the "scout_account_key" variable in `site.yml`, then:
 
 	ansible-playbook site.yml
 
@@ -45,7 +44,7 @@ Scout configures monitoring by role names - these are specified via the `roles` 
   </thead>
   <tbody>
     <tr>
-      <td style="width:15%">:scout_key</td>
+      <td style="width:15%">:scout_account_key</td>
       <td>
         The agent requires a Scout account and the account's associated key. The key can be found in the account settings tab within the Scout UI or in the server setup instructions. The key looks like:
           <code>0mZ6BD9DR0qyZjaBLCPZZWkW3n2Wn7DV9xp5gQPs</code> 
@@ -67,16 +66,21 @@ Scout configures monitoring by role names - these are specified via the `roles` 
   </thead>
   <tbody>
     <tr>
-      <td>:scout_user</td>
-      <td>User to run the Scout agent under. Will be created if it does not exist.</td>
-      <td><code>scout</code></td>
+      <td>:hostname</td>
+      <td>Optional hostname override for this host.</td>
+      <td><code>nil</code></td>
     </tr>
     <tr>
-      <td>:name</td>
+      <td>:display_name</td>
       <td>Optional name to display for this host within the Scout UI.</td>
       <td><code>nil</code></td>
     </tr>
-        <tr>
+    <tr>
+      <td>:log_file</td>
+      <td>Optional log file location.</td>
+      <td><code>nil</code></td>
+    </tr>
+    <tr>
       <td>:environment</td>
       <td>Optional environment to group this host under in the Scout UI.</td>
       <td><code>nil</code></td>
@@ -84,6 +88,16 @@ Scout configures monitoring by role names - these are specified via the `roles` 
     <tr>
       <td>:roles</td>
       <td>A comma-separated list of roles for host node. Roles are defined through Scout's UI.</td>
+      <td><code>nil</code></td>
+    </tr>
+    <tr>
+      <td>:http_proxy</td>
+      <td>Optional http proxy to connect to scout through.</td>
+      <td><code>nil</code></td>
+    </tr>
+    <tr>
+      <td>:https_proxy</td>
+      <td>Optional https proxy to connect to scout through.</td>
       <td><code>nil</code></td>
     </tr>
   </tbody>

@@ -1,0 +1,22 @@
+account_key: {{ scout_account_key }}
+{% if scout_hostname %}
+hostname: {{ scout_hostname }}
+{% endif %}
+{% if scout_display_name %}
+display_name: {{ scout_display_name }}
+{% endif %}
+{% if scout_log_file %}
+log_file: {{ scout_log_file }}
+{% endif %}
+{% if scout_environment %}
+environment: {{ scout_environment }}
+{% endif %}
+{% if scout_roles %}
+roles: {{ scout_roles }}
+{% endif %}
+{% if scout_http_proxy %}
+http_proxy: {{ scout_http_proxy }}
+{% endif %}
+{% if scout_https_proxy %}
+https_proxy: {{ scout_https_proxy }}
+{% endif %}

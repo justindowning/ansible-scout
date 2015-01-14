@@ -4,8 +4,15 @@
 
 - hosts: all
   user: random_user
+  sudo: true
   roles:
     - scout_agent
   vars:
-    scout_key: # REQUIRED - looks like: 0mZ6BD9DR0qyZjaBLCPZZWkW3n2Wn7DV9xp5gQPs
-    scout_user: scout
+    scout_account_key: # REQUIRED - looks like: 0mZ6BD9DR0qyZjaBLCPZZWkW3n2Wn7DV9xp5gQPs
+    scout_hostname:
+    scout_display_name:
+    scout_log_file:
+    scout_environment:
+    scout_roles:
+    scout_http_proxy:
+    scout_https_proxy:

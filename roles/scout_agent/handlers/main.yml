@@ -1,0 +1,3 @@
+- name: restart scout
+  service: name=scout state=restarted
+  

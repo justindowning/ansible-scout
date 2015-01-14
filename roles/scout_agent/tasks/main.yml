@@ -1,57 +1,26 @@
 ---
 - name: Checking for required variables
-  fail: msg="Bailing out. A scout_key is required." 
-  when: scout_key is not defined 
+  fail: msg="Bailing out. A scout_account_key is required." 
+  when: scout_account_key is not defined 
 
-- name: Add the scout user
-  user: name={{ scout_user }} home=/home/{{ scout_user }} shell=/bin/bash
+- name: Install the apt-key for the scout repository
+  apt_key: url=https://archive.scoutapp.com/scout-archive.key
 
-- name: Create the directory for the public key
-  file: path=/home/{{ scout_user }}/.scout
+- name: Set up the scout apt repository
+  apt_repository: repo='deb http://archive.scoutapp.com ubuntu main'
+
+- name: install the scoutd package
+  apt: name=scoutd state=present
+
+- name: Ensure the directory for the public key exists
+  file: path=/var/lib/scoutd/.scout
+          owner=scoutd
+          group=scoutd
           state=directory
 
-- name: Copy scout_rsa.pub to the /home/{{ scout_user }}/.scout directory
-  copy: src=scout_rsa.pub dest=/home/{{ scout_user }}/.scout
+- name: Copy scout_rsa.pub to the /var/lib/scoutd/.scout directory
+  copy: src=scout_rsa.pub dest=/var/lib/scoutd/.scout owner=scoutd group=scoutd mode=0644
 
-- name: Set the proper permissions for .scout
-  action: file path=/home/{{ scout_user }}/.scout/ mode=0700 owner={{ scout_user }} group={{ scout_user }}
-
-- name: Set the proper permissions for .scout
-  action: file path=/home/{{ scout_user }}/.scout/scout_rsa.pub mode=0400 owner={{ scout_user }} group={{ scout_user }}
-
-- name: Install prerequisite packages
-  action: apt pkg={{item}} state=installed
-  with_items:
-    - sysstat
-    - sudo
-    - ruby
-    - rubygems
-  when: ansible_os_family == 'Debian'
-  
-- name: Install prerequisite packages
-  action: yum pkg={{item}} state=installed
-  with_items:
-    - sysstat
-    - sudo
-    - ruby
-    - rubygems
-  when: ansible_os_family == 'RedHat'
-
-- name: Install the scout gem
-  gem: name=scout state=present user_install=no
-
-- name: Make sure the cron service is running
-  action: service name=cron state=started
-  when: ansible_os_family == 'Debian'
-
-- name: Make sure the cron service is running
-  action: service name=crond state=started
-  when: ansible_os_family == 'Redhat'
-
-- name: Copy the cron job for scout
-  action: template src=scout_debian.j2 dest=/etc/cron.d/scout
-  when: ansible_os_family == 'Debian'
-
-- name: Copy the cron job for scout
-  action: template src=scout_redhat.j2 dest=/etc/cron.d/scout
-  when: ansible_os_family == 'RedHat'
+- name: Set up scout config file
+  template: src=scoutd.yml dest=/etc/scout/scoutd.yml owner=scoutd group=scoutd
+  notify: restart scout
