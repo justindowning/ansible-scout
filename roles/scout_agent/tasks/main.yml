@@ -25,7 +25,7 @@
 
 - name: Set up the scout yum repository
   get_url: url=https://archive.scoutapp.com/yum.repos.d/scout-rhel.repo dest=/etc/yum.repos.d/scout.repo
-  when: ansible_distribution == "Red Hat Enterprise Linux" or ansible_distribution == "Centos"
+  when: ansible_distribution == "Red Hat Enterprise Linux" or ansible_distribution == "CentOS"
 
 - name: Set up the scout yum repository
   get_url: url=https://archive.scoutapp.com/yum.repos.d/scout-fedora.repo dest=/etc/yum.repos.d/scout.repo
