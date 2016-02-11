@@ -4,7 +4,7 @@
   when: scout_account_key is not defined 
 
 - name: Install the Ubuntu apt-key
-  apt_key: url=https://archive.scoutapp.com/scout-archive.key
+  apt_key: id=A38683E4 url=https://archive.scoutapp.com/scout-archive.key
   when: ansible_distribution == 'Ubuntu'
 
 - name: Set up the scout apt repository
