@@ -2,7 +2,7 @@
 galaxy_info:
   author: Justin Downing
   description: Install scout monitoring agent
-  license: MIT
+  license: Apache
   min_ansible_version: 1.4
   platforms:
   - name: EL

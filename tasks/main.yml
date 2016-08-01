@@ -1,7 +1,7 @@
 ---
 - name: Checking for required variables
-  fail: msg="Bailing out. A scout_account_key is required." 
-  when: scout_account_key is not defined 
+  fail: msg="Bailing out. A scout_account_key is required."
+  when: scout_account_key is not defined
 
 - name: Install the Ubuntu apt-key
   apt_key: id=A38683E4 url=https://archive.scoutapp.com/scout-archive.key
@@ -44,9 +44,6 @@
 - name: Install libselinux-python bindings
   yum: name=libselinux-python state=present
   when: ansible_distribution == "Red Hat Enterprise Linux" or ansible_distribution == "CentOS"
-
-- name: Copy scout_rsa.pub to the /var/lib/scoutd/.scout directory
-  copy: src=scout_rsa.pub dest=/var/lib/scoutd/.scout owner=scoutd group=scoutd mode=0644
 
 - name: Set up scout config file
   template: src=scoutd.yml dest=/etc/scout/scoutd.yml owner=scoutd group=scoutd
