@@ -35,12 +35,6 @@
   yum: name=scoutd state=latest
   when: ansible_distribution == "Red Hat Enterprise Linux" or ansible_distribution == "CentOS" or ansible_distribution == "Fedora"
 
-- name: Ensure the directory for the public key exists
-  file: path=/var/lib/scoutd/.scout
-          owner=scoutd
-          group=scoutd
-          state=directory
-
 - name: Install libselinux-python bindings
   yum: name=libselinux-python state=present
   when: ansible_distribution == "Red Hat Enterprise Linux" or ansible_distribution == "CentOS"
