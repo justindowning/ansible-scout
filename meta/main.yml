@@ -14,8 +14,8 @@ galaxy_info:
   - name: Debian
     versions:
     - all
-  categories:
-  - networking
-  - system
+  galaxy_tags:
+    - networking
+    - system
 
 dependencies: []
