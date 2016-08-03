@@ -1,25 +1,9 @@
 account_key: {{ scout_account_key }}
-{% if scout_hostname is defined %}
 hostname: {{ scout_hostname }}
-{% endif %}
-{% if scout_display_name is defined %}
 display_name: {{ scout_display_name }}
-{% endif %}
-{% if scout_log_file is defined %}
 log_file: {{ scout_log_file }}
-{% endif %}
-{% if scout_ruby_path is defined %}
 ruby_path: {{ scout_ruby_path }}
-{% endif %}
-{% if scout_environment is defined %}
 environment: {{ scout_environment }}
-{% endif %}
-{% if scout_roles is defined %}
 roles: {{ scout_roles }}
-{% endif %}
-{% if scout_http_proxy is defined %}
 http_proxy: {{ scout_http_proxy }}
-{% endif %}
-{% if scout_https_proxy is defined %}
 https_proxy: {{ scout_https_proxy }}
-{% endif %}

@@ -1,10 +1,10 @@
 ---
 scout_account_key: # REQUIRED - looks like: 0mZ6BD9DR0qyZjaBLCPZZWkW3n2Wn7DV9xp5gQPs
+scout_http_proxy:
+scout_https_proxy:
 scout_hostname:
 scout_display_name:
 scout_log_file:
 scout_ruby_path:
 scout_environment:
-scout_roles:
-scout_http_proxy:
-scout_https_proxy:
+scout_roles: # commma separated string eg: foo,bar,baz
