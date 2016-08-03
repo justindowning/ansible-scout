@@ -8,7 +8,7 @@
   when: ansible_distribution == 'Ubuntu'
 
 - name: Set up the scout apt repository
-  apt_repository: repo='deb http://archive.scoutapp.com ubuntu main'
+  apt_repository: repo="deb http://archive.scoutapp.com {{ ansible_distribution_release }} main" filename=scout.list
   when: ansible_distribution == 'Ubuntu'
 
 - name: install the scoutd package
