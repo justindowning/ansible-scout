@@ -4,11 +4,11 @@
   when: scout_account_key is not defined
 
 - name: Install the Ubuntu apt-key
-  apt_key: id=A38683E4 url=https://archive.scoutapp.com/scout-archive.key
+  apt_key: id=A38683E4 url=https://archive.server.pingdom.com/scout-archive.key
   when: ansible_distribution == 'Ubuntu'
 
 - name: Set up the scout apt repository
-  apt_repository: repo="deb http://archive.scoutapp.com {{ ansible_distribution_release }} main" filename=scout.list
+  apt_repository: repo="deb http://archive.server.pingdom.com {{ ansible_distribution_release }} main" filename=scout.list
   when: ansible_distribution == 'Ubuntu'
 
 - name: install the scoutd package
@@ -20,15 +20,15 @@
   when: ansible_distribution == "Fedora"
 
 - name: Install the RedHat GPG key
-  rpm_key: state=present key=https://archive.scoutapp.com/RPM-GPG-KEY-scout
+  rpm_key: state=present key=https://archive.server.pingdom.com/RPM-GPG-KEY-scout
   when: ansible_distribution == "Red Hat Enterprise Linux" or ansible_distribution == "CentOS" or ansible_distribution == "Fedora"
 
 - name: Set up the scout yum repository
-  get_url: url=https://archive.scoutapp.com/yum.repos.d/scout-rhel.repo dest=/etc/yum.repos.d/scout.repo
+  get_url: url=https://archive.server.pingdom.com/yum.repos.d/scout-rhel.repo dest=/etc/yum.repos.d/scout.repo
   when: ansible_distribution == "Red Hat Enterprise Linux" or ansible_distribution == "CentOS"
 
 - name: Set up the scout yum repository
-  get_url: url=https://archive.scoutapp.com/yum.repos.d/scout-fedora.repo dest=/etc/yum.repos.d/scout.repo
+  get_url: url=https://archive.server.pingdom.com/yum.repos.d/scout-fedora.repo dest=/etc/yum.repos.d/scout.repo
   when: ansible_distribution == "Fedora"
 
 - name: Install the scoutd package
